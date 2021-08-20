@@ -8,7 +8,7 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
 }
 body {
-    font-family: 'Montserrat';
+    font-family: Helvetica;
     background-color: #F7F7F7;
 };
 `;
