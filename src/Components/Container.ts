@@ -27,13 +27,25 @@ const Container = styled.div`
 
   .content {
     display: flex;
+    justify-content: center;
     padding: 2rem 0;
   }
 
   .filters {
     background-color: #fff;
-    width: 10rem;
     height: 25rem;
+  }
+
+  .heros {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem;
+  }
+
+  .pageChange {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
   }
 `;
 
