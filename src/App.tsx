@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './Components/Navbar';
 import Container from './Components/Container';
-import HeroCard from './Components/HeroCard';
+import FlipCard from './Components/FlipCard';
 import { AiOutlineSearch } from 'react-icons/ai'
 
 function App() {
@@ -28,7 +28,6 @@ function App() {
   };
 
   const currentPage = paginateData();
-  console.log(info);
 
   return (
     <>
@@ -49,10 +48,9 @@ function App() {
         <div className="heros">
           {!searchTerm 
           ? currentPage.map((hero) => 
-          <HeroCard key={hero.id}>
-            <img src={hero.images.sm} alt="" />
-            <p>{hero.name}</p>
-          </HeroCard>) 
+          <FlipCard key={hero.id} src={hero.images.sm} name={hero.name}>
+            <p>textoadaepe</p>
+          </FlipCard>) 
           : info.filter((term: any) => {
             if (searchTerm === "") {
               return term;
@@ -60,10 +58,9 @@ function App() {
               return term;
             }
           }).map((hero: any) => 
-          <HeroCard key={hero.id}>
-          <img src={hero.images.sm} alt="" />
-          <p>{hero.name}</p>
-        </HeroCard>)}
+          <FlipCard key={hero.id} src={hero.images.sm} name={hero.name}>
+            <p>textoadaepe</p>
+        </FlipCard>)}
         </div>
       </div>
       <div className="pageChange">
