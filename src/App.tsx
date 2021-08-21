@@ -10,8 +10,9 @@ function App() {
     paginateData();
   }, [])
 
-  const [info, setInfo] = useState([]);
+  const [info, setInfo] = useState<any>([]);
   const [index, setIndex] = useState({ indexA: 0, indexB: 20 });
+  const [searchTerm, setSearchTerm] = useState('');
 
   const fetchData = async () => {
     const url = 'https://akabab.github.io/superhero-api/api/all.json';
@@ -22,10 +23,12 @@ function App() {
   };
 
   const paginateData = (): any[] => {
-    return info.slice(index.indexA, index.indexB);
+    const paginated = info.slice(index.indexA, index.indexB)
+    return paginated;
   };
 
   const currentPage = paginateData();
+  console.log(info);
 
   return (
     <>
@@ -33,18 +36,34 @@ function App() {
     <Container>
       <div className="search">
         <AiOutlineSearch id="searchIcon" size="1.5rem" />
-        <input type="text" placeholder="Search here for your favorite heros!" />
+        <input 
+        type="text"
+        placeholder="Search here for your favorite heros!" 
+        onChange={e => setSearchTerm(e.target.value)} 
+        value={searchTerm} />
       </div>
       <div className="content">
         <div className="filters">
           <p>Filters:</p>
         </div>
         <div className="heros">
-          {currentPage.map((hero) => 
+          {!searchTerm 
+          ? currentPage.map((hero) => 
           <HeroCard key={hero.id}>
             <img src={hero.images.sm} alt="" />
             <p>{hero.name}</p>
-          </HeroCard>)}
+          </HeroCard>) 
+          : info.filter((term: any) => {
+            if (searchTerm === "") {
+              return term;
+            } else if (term.name.toLowerCase().includes(searchTerm.toLowerCase())) {
+              return term;
+            }
+          }).map((hero: any) => 
+          <HeroCard key={hero.id}>
+          <img src={hero.images.sm} alt="" />
+          <p>{hero.name}</p>
+        </HeroCard>)}
         </div>
       </div>
       <div className="pageChange">
