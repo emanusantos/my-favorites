@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
   padding: 1rem 10rem;
 
   p {
@@ -43,9 +45,14 @@ const Container = styled.div`
   }
 
   .pageChange {
+    align-self: center;
     display: flex;
     justify-content: space-between;
-    text-align: center;
+    gap: 1.5rem;
+
+    p {
+      cursor: pointer;
+    }
   }
 `;
 

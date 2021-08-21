@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { GiBatMask } from 'react-icons/gi';
+import { GiBatMask, GiSpiderMask, GiLightningMask, GiIronMask } from 'react-icons/gi';
 
 const StyledNav = styled.nav`
     display: flex;
@@ -20,6 +20,9 @@ const StyledNav = styled.nav`
     }
 
     ul {
+        display: flex;
+        justify-content: space-between;
+        gap: 30.5rem;
         list-style-type: none;
     }
 `;
@@ -40,6 +43,7 @@ const Navbar: React.FC = () => {
         <StyledNav>
             <ul>
                 <li id="title"><strong>My Favorite </strong><GiBatMask/> Super-Heros</li>
+                <li id="masksLogo"><GiSpiderMask size="2rem" /> <GiLightningMask size="2rem" /> <GiIronMask size="2rem" /> </li>
             </ul>
         </StyledNav>
         <Underline />
