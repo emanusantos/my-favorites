@@ -7,12 +7,13 @@ const StarRating = () => {
 
     return (
         <div>
-            {[ ...Array(5)].map((star, i) => {
+            {[...Array(5)].map((star, i) => {
                 const ratingValue = i + 1
 
                 return (
                     <label>
                         <input 
+                        className="ratings"
                         type="radio" 
                         name="rating" 
                         value={ratingValue} 
@@ -27,7 +28,6 @@ const StarRating = () => {
                     </label>
                 );
             })}
-            <p>The rating is: {rating}</p>
         </div>
     );
 };

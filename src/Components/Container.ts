@@ -20,6 +20,7 @@ const Container = styled.div`
     &::placeholder {
       font-style: italic;
     }
+
   }
 
   .search {

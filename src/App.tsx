@@ -5,7 +5,6 @@ import FlipCard from './Components/FlipCard';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { GrNext, GrPrevious } from 'react-icons/gr';
 import { CgBorderStyleDotted } from 'react-icons/cg';
-import StarRating from './Components/StarRating';
 
 function App() {
   useEffect(() => {
@@ -16,13 +15,13 @@ function App() {
   const [info, setInfo] = useState<any>([]);
   const [index, setIndex] = useState({ indexA: 0, indexB: 20 });
   const [searchTerm, setSearchTerm] = useState('');
+  const [interest, setInterest] = useState(false);
 
-  const fetchData = async () => {
+  const fetchData = async (): Promise<void> => {
     const url = 'https://akabab.github.io/superhero-api/api/all.json';
     const req = await fetch(url);
     const data = await req.json();
     setInfo(data);
-    console.log(data);
   };
 
   const paginateData = (): any[] => {
@@ -50,6 +49,10 @@ function App() {
     });
   };
 
+  const interestToggler = () => {
+    setInterest(!interest);
+  }
+
   return (
     <>
     <Navbar />
@@ -69,9 +72,7 @@ function App() {
         <div className="heros">
           {!searchTerm 
           ? currentPage.map((hero) => 
-          <FlipCard key={hero.id} src={hero.images.sm} name={hero.name}>
-            <StarRating />
-          </FlipCard>) 
+          <FlipCard key={hero.id} src={hero.images.sm} name={hero.name} />)
           : info.filter((term: any) => {
             if (searchTerm === "") {
               return term;
@@ -79,16 +80,14 @@ function App() {
               return term;
             }
           }).map((hero: any) => 
-          <FlipCard key={hero.id} src={hero.images.sm} name={hero.name}>
-            <StarRating />
-        </FlipCard>)}
+          <FlipCard key={hero.id} src={hero.images.sm} name={hero.name} />)}
         </div>
       </div>
-      <div className="pageChange">
+      {!searchTerm && <div className="pageChange">
         {index.indexA !== 0 && <p id="previous" onClick={previousPage}><GrPrevious /></p>}
         <p><CgBorderStyleDotted /></p>
         <p id="next" onClick={nextPage}><GrNext /></p>
-      </div>
+      </div>}
     </Container>
     </>
   );

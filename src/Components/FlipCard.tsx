@@ -1,4 +1,7 @@
-import styled from 'styled-components'
+import { useState } from 'react';
+import styled from 'styled-components';
+import StarRating from './StarRating';
+import { GrDown} from 'react-icons/gr';
 
 const CardContainer = styled.div`
     display: flex;
@@ -6,10 +9,10 @@ const CardContainer = styled.div`
     padding: .5rem;
     margin: 1rem;
     text-align: center;
-    width: 100%;
-    height: 100%;
     width: 12rem;
-    height: 17rem;
+    max-height: 23rem;
+    background-color: #F3F3F3;
+    box-shadow: 0px 3px 25px #00000014;
 
     p {
         font-style: italic;
@@ -21,11 +24,7 @@ const CardContainer = styled.div`
         max-height: 15rem;
     }
 
-    &:hover .card {
-        transform: rotateY(180deg);
-    }
-
-    input {
+    .ratings {
         display: none;
     }
     
@@ -33,18 +32,20 @@ const CardContainer = styled.div`
         cursor: pointer;
         transition: color 200ms;
     }
+
+    &:hover {
+        transform: scale(1.2);
+        transition-duration: .5s;
+    }
 `;
 
 const Card = styled.div`
     width: 100%;
     height: 100%;
-    transition: transform .6s ease-in-out;
-    transform-style: preserve-3d;
 
     figure {
         width: 100%;
         height: 100%;
-        position: absolute;
         border-radius: 1rem;
         margin: 0;
     }
@@ -53,27 +54,72 @@ const Card = styled.div`
         background: #F7F7F7;
     }
 
-    .back {
-        background: #fff;
-        transform: rotateY(180deg);
+    #collapse {
+        cursor: pointer;
     }
 
-    &:hover {
-        transform: rotateY(45deg);
-        box-shadow: 0px 3px 25px #00000014;
+    .info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .option input {
+        float: right;
+        clear: none;
+    }
+
+    .option label {
+        float: left;
+        font-size: .9rem;
     }
 `;
 
-const FlipCard = ({ src, name, children }: any) => {
+const FlipCard = ({ src, name }: any) => {
+    const [interest, setInterest] = useState<boolean>(false);
+    const [radio, setRadio] = useState<string | null>(null);
+
+    const toggleInterest = (): void => {
+        setInterest(!interest);
+    }
+
     return (
             <CardContainer>
                 <Card className="card">
-                    <figure className="front">
+                    <figure>
                         <img src={src} alt="" />
-                        <p>{name}</p>
-                    </figure>
-                    <figure className="back">
-                        { children }
+                        <StarRating />
+                        <p>{name} <GrDown id="collapse" size={15} onClick={toggleInterest} /></p>
+                        {interest && <div className="info">
+                            <div className="option">
+                                <label>Already seen</label>
+                                <input 
+                                className="interests" 
+                                type="radio" 
+                                value="seen" 
+                                checked={radio === 'seen'} 
+                                onChange={(e) => setRadio(e.target.value)} 
+                                />
+                            </div>          
+                            <div className="option">
+                                <label>Yet to see</label>
+                                <input 
+                                className="interests" 
+                                type="radio" 
+                                value="yet" 
+                                checked={radio === 'yet'} 
+                                onChange={(e) => setRadio(e.target.value)} />
+                            </div>
+                            <div className="option">
+                                <label>Never seen</label>
+                                <input 
+                                className="interests" 
+                                type="radio" 
+                                value="never" 
+                                checked={radio === 'never'} 
+                                onChange={(e) => setRadio(e.target.value)}
+                                />
+                            </div>
+                        </div>}
                     </figure>
                 </Card>
             </CardContainer>
