@@ -24,6 +24,15 @@ const CardContainer = styled.div`
     &:hover .card {
         transform: rotateY(180deg);
     }
+
+    input {
+        display: none;
+    }
+    
+    .star {
+        cursor: pointer;
+        transition: color 200ms;
+    }
 `;
 
 const Card = styled.div`

@@ -5,6 +5,7 @@ import FlipCard from './Components/FlipCard';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { GrNext, GrPrevious } from 'react-icons/gr';
 import { CgBorderStyleDotted } from 'react-icons/cg';
+import StarRating from './Components/StarRating';
 
 function App() {
   useEffect(() => {
@@ -69,7 +70,7 @@ function App() {
           {!searchTerm 
           ? currentPage.map((hero) => 
           <FlipCard key={hero.id} src={hero.images.sm} name={hero.name}>
-            <p>textoadaepe</p>
+            <StarRating />
           </FlipCard>) 
           : info.filter((term: any) => {
             if (searchTerm === "") {
@@ -79,7 +80,7 @@ function App() {
             }
           }).map((hero: any) => 
           <FlipCard key={hero.id} src={hero.images.sm} name={hero.name}>
-            <p>textoadaepe</p>
+            <StarRating />
         </FlipCard>)}
         </div>
       </div>
