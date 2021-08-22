@@ -3,6 +3,7 @@ import styled from "styled-components";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   padding: 1rem 10rem;
 
   p {
@@ -29,7 +30,7 @@ const Container = styled.div`
 
   .content {
     display: flex;
-    justify-content: center;
+    gap: 8rem;
     padding: 2rem 0;
   }
 
@@ -41,6 +42,8 @@ const Container = styled.div`
   .heros {
     display: flex;
     flex-wrap: wrap;
+    width: auto;
+    height: auto;
     padding: 1rem;
   }
 
@@ -50,8 +53,13 @@ const Container = styled.div`
     justify-content: space-between;
     gap: 1.5rem;
 
-    p {
+    #next, #previous {
       cursor: pointer;
+      
+      &:hover {
+        transform: scale(1.5);
+        transition-duration: .5s;
+      }
     }
   }
 `;

@@ -4,13 +4,12 @@ const CardContainer = styled.div`
     display: flex;
     flex-direction: column;
     padding: .5rem;
-    border-radius: 1rem;
     margin: 1rem;
     text-align: center;
     width: 100%;
     height: 100%;
-    max-width: 11rem;
-    max-height: 17.95rem;
+    width: 12rem;
+    height: 17rem;
 
     p {
         font-style: italic;
@@ -18,7 +17,7 @@ const CardContainer = styled.div`
 
     img {
         clip-path: circle();
-        max-width: 10rem;
+        max-width: 8rem;
         max-height: 15rem;
     }
 
@@ -38,6 +37,7 @@ const Card = styled.div`
         height: 100%;
         position: absolute;
         border-radius: 1rem;
+        margin: 0;
     }
 
     .front {

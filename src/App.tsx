@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './Components/Navbar';
 import Container from './Components/Container';
 import FlipCard from './Components/FlipCard';
-import { AiOutlineSearch } from 'react-icons/ai'
+import { AiOutlineSearch } from 'react-icons/ai';
+import { GrNext, GrPrevious } from 'react-icons/gr';
+import { CgBorderStyleDotted } from 'react-icons/cg';
 
 function App() {
   useEffect(() => {
@@ -28,6 +30,24 @@ function App() {
   };
 
   const currentPage = paginateData();
+
+  const nextPage = () => {
+    setIndex({ indexA: index.indexA + 20, indexB: index.indexB + 20})
+    
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
+
+  const previousPage = () => {
+    setIndex({ indexA: index.indexA - 20, indexB: index.indexB - 20})
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
 
   return (
     <>
@@ -64,8 +84,9 @@ function App() {
         </div>
       </div>
       <div className="pageChange">
-        {index.indexA !== 0 && <p onClick={() => setIndex({ indexA: index.indexA - 20, indexB: index.indexB - 20})}>Previous</p>}
-        <p id="next" onClick={() => setIndex({ indexA: index.indexA + 20, indexB: index.indexB + 20})}>Next</p>
+        {index.indexA !== 0 && <p id="previous" onClick={previousPage}><GrPrevious /></p>}
+        <p><CgBorderStyleDotted /></p>
+        <p id="next" onClick={nextPage}><GrNext /></p>
       </div>
     </Container>
     </>
