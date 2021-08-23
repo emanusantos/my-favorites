@@ -73,7 +73,14 @@ const Card = styled.div`
     }
 `;
 
-const FlipCard = ({ src, name, value }: any) => {
+interface CardProps {
+    src: string;
+    name: string;
+    filterRadio?: (e: any) => void;
+    id?: any;
+}
+
+const FlipCard = ({ src, name, filterRadio, id }: CardProps) => {
     const [interest, setInterest] = useState<boolean>(false);
     const [radio, setRadio] = useState<string | null>(null);
 
@@ -92,29 +99,35 @@ const FlipCard = ({ src, name, value }: any) => {
                             <div className="option">
                                 <label>Already seen</label>
                                 <input 
+                                id={id}
                                 className="interests" 
                                 type="radio" 
                                 value="seen" 
                                 checked={radio === 'seen'} 
+                                onClick={filterRadio}
                                 onChange={(e) => setRadio(e.target.value)} 
                                 />
                             </div>          
                             <div className="option">
                                 <label>Yet to see</label>
                                 <input 
+                                id={id}
                                 className="interests" 
                                 type="radio" 
                                 value="yet" 
-                                checked={radio === 'yet'} 
+                                checked={radio === 'yet'}
+                                onClick={filterRadio}
                                 onChange={(e) => setRadio(e.target.value)} />
                             </div>
                             <div className="option">
                                 <label>Never seen</label>
                                 <input 
+                                id={id}
                                 className="interests" 
                                 type="radio" 
                                 value="never" 
-                                checked={radio === 'never'} 
+                                checked={radio === 'never'}
+                                onClick={filterRadio} 
                                 onChange={(e) => setRadio(e.target.value)}
                                 />
                             </div>

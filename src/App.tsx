@@ -13,14 +13,19 @@ function App() {
   }, [])
 
   const [info, setInfo] = useState<any>([]);
+  const [seen, setSeen] = useState<string[]>([]);
+  const [yet, setYet] = useState<string[]>([]);
+  const [never, setNever] = useState<string[]>([]);
   const [index, setIndex] = useState({ indexA: 0, indexB: 20 });
   const [searchTerm, setSearchTerm] = useState('');
+  const [filter, setFilter] = useState<string | null>(null);
 
   const fetchData = async (): Promise<void> => {
     const url = 'https://akabab.github.io/superhero-api/api/all.json';
     const req = await fetch(url);
     const data = await req.json();
     setInfo(data);
+    console.log(info);
   };
 
   const paginateData = (): any[] => {
@@ -48,6 +53,23 @@ function App() {
     });
   };
 
+  const filterHero = (e: any) => {
+    const heroId = e.target.id;
+    const heroClass = e.target.value;
+
+    if (heroClass === 'seen') {
+      setSeen([heroId, ...seen]);
+    };
+
+    if (heroClass === 'yet') {
+      setYet([heroId, ...yet]);
+    };
+
+    if (heroClass === 'never') {
+      setNever([heroId, ...never])
+    };
+  };
+
   return (
     <>
     <Navbar />
@@ -65,33 +87,80 @@ function App() {
           <p>Filters:</p>
           <div className="filter">
             <label>None</label>
-            <input type="radio" />
+            <input 
+            type="radio" 
+            value=''
+            checked={filter === null} 
+            onChange={(e) => setFilter(e.target.value)} 
+            />
           </div>
           <div className="filter">
             <label>Already seen</label>
-            <input type="radio" value="seen" />
+            <input 
+            type="radio" 
+            value="seen" 
+            checked={filter === 'seen'} 
+            onChange={(e) => setFilter(e.target.value)} 
+            />
           </div>
           <div className="filter">
             <label>Yet to see</label>
-            <input type="radio" value="yet" />
+            <input 
+            type="radio" 
+            value="yet" 
+            checked={filter === 'yet'} 
+            onChange={(e) => setFilter(e.target.value)}
+            />
           </div>
           <div className="filter">
             <label>Never seen</label>
-          <input type="radio" value="never" />
+            <input 
+            type="radio" 
+            value="never" 
+            checked={filter === 'never'} 
+            onChange={(e) => setFilter(e.target.value)}
+            />
           </div>
         </div>
         <div className="heros">
-          {!searchTerm 
-          ? currentPage.map((hero) => 
-          <FlipCard key={hero.id} src={hero.images.sm} name={hero.name} />)
-          : info.filter((term: any) => {
+          {filter === 'seen' && info.filter((term: any) => {
+            if ([...seen].includes(term.id.toString())) {
+              return term;
+            } else {
+              return term;
+            }
+          }).map((hero: any) => 
+          <FlipCard key={hero.id} src={hero.images.sm} name={hero.name} filterRadio={filterHero} id={hero.id} />)}
+
+          {filter === 'yet' && info.filter((term: any) => {
+            if ([...yet].includes(term.id.toString())) {
+              return term;
+            } else {
+              return term;
+            }
+          }).map((hero: any) => 
+          <FlipCard key={hero.id} src={hero.images.sm} name={hero.name} filterRadio={filterHero} id={hero.id} />)}
+
+          {filter === 'never' && info.filter((term: any) => {
+            if ([...never].includes(term.id.toString())) {
+              return term;
+            } else {
+              return term;
+            }
+          }).map((hero: any) => 
+          <FlipCard key={hero.id} src={hero.images.sm} name={hero.name} filterRadio={filterHero} id={hero.id} />)}
+
+          {!searchTerm && !filter && currentPage.map((hero) => 
+          <FlipCard key={hero.id} src={hero.images.sm} name={hero.name} filterRadio={filterHero} id={hero.id} />)}
+
+          {searchTerm && info.filter((term: any) => {
             if (searchTerm === "") {
               return term;
             } else if (term.name.toLowerCase().includes(searchTerm.toLowerCase())) {
               return term;
             }
           }).map((hero: any) => 
-          <FlipCard key={hero.id} src={hero.images.sm} name={hero.name} />)}
+          <FlipCard key={hero.id} src={hero.images.sm} name={hero.name} filterRadio={filterHero} id={hero.id} />)}
         </div>
       </div>
       {!searchTerm && <div className="pageChange">
