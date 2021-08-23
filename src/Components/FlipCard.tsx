@@ -93,7 +93,7 @@ const FlipCard = ({ src, name, filterRadio, id }: CardProps) => {
                 <Card className="card">
                     <figure>
                         <img src={src} alt="" />
-                        <StarRating />
+                        <StarRating key={id} />
                         <p>{name} <GrDown id="collapse" size={15} onClick={toggleInterest} /></p>
                         {interest && <div className="info">
                             <div className="option">

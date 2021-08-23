@@ -10,7 +10,8 @@ function App() {
   useEffect(() => {
     fetchData();
     paginateData();
-  }, [])
+    getFiltereds();
+  }, []);
 
   const [info, setInfo] = useState<any>([]);
   const [seen, setSeen] = useState<string[]>([]);
@@ -19,6 +20,12 @@ function App() {
   const [index, setIndex] = useState({ indexA: 0, indexB: 20 });
   const [searchTerm, setSearchTerm] = useState('');
   const [filter, setFilter] = useState<string | null>(null);
+
+  useEffect(() => {
+    localStorage.setItem('seenHeroes', JSON.stringify(seen));
+    localStorage.setItem('yetHeroes', JSON.stringify(yet));
+    localStorage.setItem('neverHeroes', JSON.stringify(never));
+  }, [seen, yet, never])
 
   const fetchData = async (): Promise<void> => {
     const url = 'https://akabab.github.io/superhero-api/api/all.json';
@@ -32,6 +39,16 @@ function App() {
     const paginated = info.slice(index.indexA, index.indexB)
     return paginated;
   };
+
+  const getFiltereds = () => {
+    const storedSeenHeroes = localStorage.getItem('seenHeroes')!;
+    setSeen(JSON.parse(storedSeenHeroes));
+    const storedYetHeroes = localStorage.getItem('yetHeroes')!;
+    setYet(JSON.parse(storedYetHeroes));
+    const storedNeverHeroes = localStorage.getItem('neverHeroes')!;
+    setNever(JSON.parse(storedNeverHeroes));
+  };
+
 
   const currentPage = paginateData();
 
@@ -59,6 +76,7 @@ function App() {
 
     if (heroClass === 'seen') {
       setSeen([heroId, ...seen]);
+      console.log(seen);
     };
 
     if (heroClass === 'yet') {
@@ -126,8 +144,6 @@ function App() {
           {filter === 'seen' && info.filter((term: any) => {
             if ([...seen].includes(term.id.toString())) {
               return term;
-            } else {
-              return term;
             }
           }).map((hero: any) => 
           <FlipCard key={hero.id} src={hero.images.sm} name={hero.name} filterRadio={filterHero} id={hero.id} />)}
@@ -135,16 +151,12 @@ function App() {
           {filter === 'yet' && info.filter((term: any) => {
             if ([...yet].includes(term.id.toString())) {
               return term;
-            } else {
-              return term;
             }
           }).map((hero: any) => 
           <FlipCard key={hero.id} src={hero.images.sm} name={hero.name} filterRadio={filterHero} id={hero.id} />)}
 
           {filter === 'never' && info.filter((term: any) => {
             if ([...never].includes(term.id.toString())) {
-              return term;
-            } else {
               return term;
             }
           }).map((hero: any) => 
