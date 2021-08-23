@@ -31,13 +31,40 @@ const Container = styled.div`
 
   .content {
     display: flex;
-    gap: 8rem;
     padding: 2rem 0;
   }
 
   .filters {
-    background-color: #fff;
-    height: 25rem;
+    display: flex;
+    flex-direction: column;
+    font-style: italic;
+    padding: 3rem 2rem;
+    background-color: #e2e2e2;
+    border-radius: 1rem;
+    box-shadow: 0px 3px 25px #00000014;
+    max-width: 14rem;
+    max-height: 15rem;
+    width: 100%;
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    .filter {
+      display: flex;
+      justify-content: space-between;
+      padding: .2rem;
+      width: 100%;
+    }
+
+    label {
+      display: block;
+    }
+
+    input {
+      display: inline-block;
+      width: auto;
+    }
   }
 
   .heros {
@@ -45,7 +72,7 @@ const Container = styled.div`
     flex-wrap: wrap;
     width: auto;
     height: auto;
-    padding: 1rem;
+    padding: 1rem 2rem;
   }
 
   .pageChange {

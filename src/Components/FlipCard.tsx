@@ -11,7 +11,8 @@ const CardContainer = styled.div`
     text-align: center;
     width: 12rem;
     max-height: 23rem;
-    background-color: #F3F3F3;
+    background-color: #e2e2e2;
+    border-radius: 1rem;
     box-shadow: 0px 3px 25px #00000014;
 
     p {
@@ -50,31 +51,29 @@ const Card = styled.div`
         margin: 0;
     }
 
-    .front {
-        background: #F7F7F7;
-    }
-
     #collapse {
         cursor: pointer;
     }
 
-    .info {
+    .option {
         display: flex;
-        flex-direction: column;
+        justify-content: space-between;
+        padding: .3rem;
+        font-style: italic;
     }
-
+    
     .option input {
-        float: right;
-        clear: none;
+        display: inline-block;
+        width: auto;
     }
 
     .option label {
-        float: left;
-        font-size: .9rem;
+        margin-right: .2rem;
+        display: inline-block;
     }
 `;
 
-const FlipCard = ({ src, name }: any) => {
+const FlipCard = ({ src, name, value }: any) => {
     const [interest, setInterest] = useState<boolean>(false);
     const [radio, setRadio] = useState<string | null>(null);
 

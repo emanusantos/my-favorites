@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from './Components/Navbar';
 import Container from './Components/Container';
 import FlipCard from './Components/FlipCard';
@@ -49,10 +49,6 @@ function App() {
     });
   };
 
-  const interestToggler = () => {
-    setInterest(!interest);
-  }
-
   return (
     <>
     <Navbar />
@@ -68,6 +64,22 @@ function App() {
       <div className="content">
         <div className="filters">
           <p>Filters:</p>
+          <div className="filter">
+            <label>None</label>
+            <input type="radio" />
+          </div>
+          <div className="filter">
+            <label>Already seen</label>
+            <input type="radio" />
+          </div>
+          <div className="filter">
+            <label>Yet to see</label>
+            <input type="radio" />
+          </div>
+          <div className="filter">
+            <label>Never seen</label>
+          <input type="radio" />
+          </div>
         </div>
         <div className="heros">
           {!searchTerm 
