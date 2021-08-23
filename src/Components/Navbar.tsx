@@ -6,7 +6,7 @@ const StyledNav = styled.nav`
     color: #373D3F;
     font-style: italic;
     padding: 2rem 10rem;
-    background-color: #fff;
+    background-color: #F5F5F5;
     border-bottom: .1rem solid #EBEBEB;
 
     #title {

@@ -15,7 +15,6 @@ function App() {
   const [info, setInfo] = useState<any>([]);
   const [index, setIndex] = useState({ indexA: 0, indexB: 20 });
   const [searchTerm, setSearchTerm] = useState('');
-  const [interest, setInterest] = useState(false);
 
   const fetchData = async (): Promise<void> => {
     const url = 'https://akabab.github.io/superhero-api/api/all.json';
@@ -70,15 +69,15 @@ function App() {
           </div>
           <div className="filter">
             <label>Already seen</label>
-            <input type="radio" />
+            <input type="radio" value="seen" />
           </div>
           <div className="filter">
             <label>Yet to see</label>
-            <input type="radio" />
+            <input type="radio" value="yet" />
           </div>
           <div className="filter">
             <label>Never seen</label>
-          <input type="radio" />
+          <input type="radio" value="never" />
           </div>
         </div>
         <div className="heros">

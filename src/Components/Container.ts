@@ -27,6 +27,7 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     border-bottom: .1rem solid #EBEBEB;
+    width: 90%;
   }
 
   .content {
