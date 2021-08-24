@@ -6,6 +6,10 @@ const Container = styled.div`
   flex-wrap: wrap;
   padding: 1rem 10rem;
 
+  @media (max-width: 50rem) {
+    padding: 1rem 4rem;
+  }
+
   p {
     font-size: 1.5rem;
   }
@@ -28,6 +32,10 @@ const Container = styled.div`
     align-items: center;
     border-bottom: .1rem solid #EBEBEB;
     width: 90%;
+
+    @media (max-width: 50rem) {
+      width: 20rem;
+    }
   }
 
   .content {
@@ -46,6 +54,10 @@ const Container = styled.div`
     max-width: 14rem;
     max-height: 15rem;
     width: 100%;
+
+    @media (max-width: 50rem) {
+      padding: 1rem 2rem;
+    }
 
     p {
       margin-bottom: 1rem;

@@ -25,6 +25,15 @@ const StyledNav = styled.nav`
         gap: 30.5rem;
         list-style-type: none;
     }
+
+    @media (max-width: 50rem) {
+        padding: 2rem 7rem;
+
+        ul {
+            width: 100%;
+            gap: 10rem;
+        }
+    };
 `;
 
 const Underline = styled.div`
@@ -35,6 +44,11 @@ const Underline = styled.div`
     height: .2rem;
     background-color: #2C3539;
     border-radius: .4rem;
+
+    @media (max-width: 50rem) {
+        left: 7rem;
+        width: 6rem;
+    }
 `;
 
 const Navbar: React.FC = () => {

@@ -35,7 +35,7 @@ const CardContainer = styled.div`
     }
 
     &:hover {
-        transform: scale(1.2);
+        transform: scale(1.05);
         transition-duration: .5s;
     }
 `;
