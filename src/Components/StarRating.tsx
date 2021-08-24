@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 
-const StarRating = () => {
+const StarRating: React.FC = () => {
+
     const [rating, setRating] = useState<null | number>(null);
     const [hover, setHover] = useState<null | number>(null);
 
@@ -10,6 +11,11 @@ const StarRating = () => {
             {[...Array(5)].map((star, i) => {
                 const ratingValue = i + 1
 
+                const valueHandler = (): void => {
+                    setRating(ratingValue);
+                    localStorage.setItem('rating', ratingValue.toString());
+                };
+
                 return (
                     <label>
                         <input 
@@ -17,7 +23,7 @@ const StarRating = () => {
                         type="radio" 
                         name="rating" 
                         value={ratingValue} 
-                        onClick={() => setRating(ratingValue)} 
+                        onClick={valueHandler} 
                         />
                         <FaStar 
                         className="star" 

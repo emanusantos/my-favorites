@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import StarRating from './StarRating';
-import { GrDown} from 'react-icons/gr';
+import { GrDown } from 'react-icons/gr';
 
 const CardContainer = styled.div`
     display: flex;
@@ -81,6 +81,7 @@ interface CardProps {
 }
 
 const FlipCard = ({ src, name, filterRadio, id }: CardProps) => {
+
     const [interest, setInterest] = useState<boolean>(false);
     const [radio, setRadio] = useState<string | null>(null);
 

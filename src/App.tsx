@@ -6,6 +6,20 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { GrNext, GrPrevious } from 'react-icons/gr';
 import { CgBorderStyleDotted } from 'react-icons/cg';
 
+interface Api {
+  appearances: {};
+  biography: {};
+  connections: {};
+  images: {
+    sm: string;
+  };
+  id: number;
+  name: string;
+  powerstats: {};
+  slug: string;
+  work: {};
+}
+
 function App() {
   useEffect(() => {
     fetchData();
@@ -13,12 +27,12 @@ function App() {
     getFiltereds();
   }, []);
 
-  const [info, setInfo] = useState<any>([]);
+  const [info, setInfo] = useState<Api[]>([]);
   const [seen, setSeen] = useState<string[]>([]);
   const [yet, setYet] = useState<string[]>([]);
   const [never, setNever] = useState<string[]>([]);
   const [index, setIndex] = useState({ indexA: 0, indexB: 20 });
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState<string>('');
   const [filter, setFilter] = useState<string | null>(null);
 
   useEffect(() => {
@@ -35,12 +49,12 @@ function App() {
     console.log(info);
   };
 
-  const paginateData = (): any[] => {
+  const paginateData = (): Api[] => {
     const paginated = info.slice(index.indexA, index.indexB)
     return paginated;
   };
 
-  const getFiltereds = () => {
+  const getFiltereds = (): void => {
     const storedSeenHeroes = localStorage.getItem('seenHeroes')!;
     setSeen(JSON.parse(storedSeenHeroes));
     const storedYetHeroes = localStorage.getItem('yetHeroes')!;
@@ -52,7 +66,7 @@ function App() {
 
   const currentPage = paginateData();
 
-  const nextPage = () => {
+  const nextPage = (): void => {
     setIndex({ indexA: index.indexA + 20, indexB: index.indexB + 20})
     
     window.scrollTo({
@@ -61,7 +75,7 @@ function App() {
     });
   };
 
-  const previousPage = () => {
+  const previousPage = (): void => {
     setIndex({ indexA: index.indexA - 20, indexB: index.indexB - 20})
 
     window.scrollTo({
@@ -70,7 +84,7 @@ function App() {
     });
   };
 
-  const filterHero = (e: any) => {
+  const filterHero = (e: React.ChangeEvent<HTMLInputElement>) => {
     const heroId = e.target.id;
     const heroClass = e.target.value;
 
@@ -141,41 +155,41 @@ function App() {
           </div>
         </div>
         <div className="heros">
-          {filter === 'seen' && info.filter((term: any) => {
+          {filter === 'seen' && info.filter((term: Api) => {
             if ([...seen].includes(term.id.toString())) {
               return term;
             }
           }).map((hero: any) => 
           <FlipCard key={hero.id} src={hero.images.sm} name={hero.name} filterRadio={filterHero} id={hero.id} />)}
 
-          {filter === 'yet' && info.filter((term: any) => {
+          {filter === 'yet' && info.filter((term: Api) => {
             if ([...yet].includes(term.id.toString())) {
               return term;
             }
-          }).map((hero: any) => 
+          }).map((hero: Api) => 
           <FlipCard key={hero.id} src={hero.images.sm} name={hero.name} filterRadio={filterHero} id={hero.id} />)}
 
-          {filter === 'never' && info.filter((term: any) => {
+          {filter === 'never' && info.filter((term: Api) => {
             if ([...never].includes(term.id.toString())) {
               return term;
             }
-          }).map((hero: any) => 
+          }).map((hero: Api) => 
           <FlipCard key={hero.id} src={hero.images.sm} name={hero.name} filterRadio={filterHero} id={hero.id} />)}
 
           {!searchTerm && !filter && currentPage.map((hero) => 
           <FlipCard key={hero.id} src={hero.images.sm} name={hero.name} filterRadio={filterHero} id={hero.id} />)}
 
-          {searchTerm && info.filter((term: any) => {
+          {searchTerm && info.filter((term: Api) => {
             if (searchTerm === "") {
               return term;
             } else if (term.name.toLowerCase().includes(searchTerm.toLowerCase())) {
               return term;
             }
-          }).map((hero: any) => 
+          }).map((hero: Api) => 
           <FlipCard key={hero.id} src={hero.images.sm} name={hero.name} filterRadio={filterHero} id={hero.id} />)}
         </div>
       </div>
-      {!searchTerm && <div className="pageChange">
+      {!searchTerm && !filter && <div className="pageChange">
         {index.indexA !== 0 && <p id="previous" onClick={previousPage}><GrPrevious /></p>}
         <p><CgBorderStyleDotted /></p>
         <p id="next" onClick={nextPage}><GrNext /></p>
